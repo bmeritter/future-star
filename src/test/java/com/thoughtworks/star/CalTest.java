@@ -17,7 +17,7 @@ public class CalTest {
     }
 
     @Test
-    public void should_return_sorted_string_with_length() {
+    public void should_return_sorted_map_with_length() {
         List<String> list = Arrays.asList("ynpan", "yzqi", "ybowang", "qiqzhao", "yibtan", "abc", "sjyuan");
 
         Map<String, Integer> resultMap = new LinkedHashMap<>();
@@ -25,6 +25,13 @@ public class CalTest {
 
         assertThat(resultMap.keySet(), contains("abc", "qiqzhao", "sjyuan", "ybowang", "yibtan", "ynpan", "yzqi"));
         assertThat(resultMap.values(), contains(3, 7, 6, 7, 6, 5, 4));
+
+    }
+
+    @Test
+    public void should_return_sorted_string_with_length() {
+        String str = "aababbbcabcdabcde";
+        assertThat(new Cal().count(str), is("5(a)<6(b)<3(c)<2(d)<1(e)"));
 
     }
 }
