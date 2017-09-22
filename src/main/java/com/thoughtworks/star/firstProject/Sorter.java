@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Sorter {
-    static Map<String, Integer> countWordsLengthAsc(List<String> words) {
+    public static Map<String, Integer> countWordsLengthAsc(List<String> words) {
         Collections.sort(words);
         Map<String, Integer> resultMap = new LinkedHashMap<>();
         for (String str : words) {
