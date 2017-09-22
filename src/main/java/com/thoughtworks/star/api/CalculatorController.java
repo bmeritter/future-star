@@ -21,4 +21,9 @@ public class CalculatorController {
     public Map<String, Integer> countWordsLength(@RequestParam List<String> words) {
         return Sorter.countWordsLengthAsc(words);
     }
+
+    @RequestMapping("/api/count-letters")
+    public String countLettersLength(@RequestParam String letters) {
+        return Sorter.sortLettersByCount(letters);
+    }
 }

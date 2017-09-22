@@ -13,7 +13,7 @@ public class Sorter {
         return resultMap;
     }
 
-    static String sortLettersByCount(String letters) {
+    public static String sortLettersByCount(String letters) {
         Map<String, Integer> countedMap = new HashMap<>();
 
         Arrays.asList(letters.split("")).forEach(item -> {
