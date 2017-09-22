@@ -1,0 +1,16 @@
+package com.thoughtworks.star.dto;
+
+public class Account {
+    private String username;
+    private String password;
+    private Integer age;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+}
