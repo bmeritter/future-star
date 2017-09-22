@@ -1,8 +1,18 @@
 group 'com.thoughtworks'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE")
+    }
+}
 
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 sourceCompatibility = 1.8
 
 repositories {
@@ -12,5 +22,7 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
+    compile "org.springframework.boot:spring-boot-starter-web"
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 
 }
