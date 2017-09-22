@@ -1,10 +1,7 @@
 package com.thoughtworks.star.api;
 
 import com.thoughtworks.star.dto.Account;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,6 +21,15 @@ public class AccountController {
     @RequestMapping("/api/accounts")
     public Map<String, Account> getAll() {
         return AccountCache.accounts;
+    }
+
+    @RequestMapping(value = "/api/accounts/{username}/{age}", method = RequestMethod.PUT)
+    public String updateAge(@PathVariable String username, @PathVariable int age) {
+        if (age != 0) {
+            AccountCache.accounts.get(username).setAge(age);
+            return "update age success";
+        }
+        return "update age failed";
     }
 
 }
