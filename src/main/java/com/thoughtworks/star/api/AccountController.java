@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
+
 public class AccountController {
 
     @PostMapping("/api/accounts")
@@ -18,5 +21,9 @@ public class AccountController {
         return "create success";
     }
 
+    @RequestMapping("/api/accounts")
+    public Map<String, Account> getAll() {
+        return AccountCache.accounts;
+    }
 
 }

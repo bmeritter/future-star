@@ -13,4 +13,7 @@ public class Account {
         return password;
     }
 
+    public Integer getAge() {
+        return age;
+    }
 }
