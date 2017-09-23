@@ -1,6 +1,7 @@
 package com.thoughtworks.star.api;
 
 import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,14 +11,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
+    private AccountService accountService;
+
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @PostMapping
     public String create(@RequestBody Account account) {
-        if ("".equals(account.getPassword()) && "".equals(account.getUsername())) {
-            return "create failed";
-        }
-        AccountCache.accounts.put(account.getUsername(), account);
-        return "create success";
+        return accountService.create(account);
     }
 
     @GetMapping
