@@ -27,13 +27,9 @@ public class AccountController {
         return AccountCache.accounts.values().stream().collect(Collectors.toList());
     }
 
-    @PutMapping(value = "/{username}/{age}")
-    public String updateAge(@PathVariable String username, @PathVariable int age) {
-        if (age != 0) {
-            AccountCache.accounts.get(username).setAge(age);
-            return "update age success";
-        }
-        return "update age failed";
+    @PutMapping(value = "/{username}")
+    public String updateAge(@PathVariable String username, @RequestBody Account account) {
+        return accountService.updateAge(username, account);
     }
 
     @RequestMapping(params = "age")

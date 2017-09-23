@@ -15,4 +15,12 @@ public class AccountService {
         return "create success";
     }
 
+    public String updateAge(String username, Account account) {
+        if (account.getAge() != 0) {
+            AccountCache.accounts.put(username, account);
+            return "update age success";
+        }
+        return "update age failed";
+    }
+
 }
