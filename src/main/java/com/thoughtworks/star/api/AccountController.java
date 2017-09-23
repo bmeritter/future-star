@@ -20,12 +20,12 @@ public class AccountController {
         return "create success";
     }
 
-    @RequestMapping
-    public Map<String, Account> getAll() {
-        return AccountCache.accounts;
+    @GetMapping
+    public List<Account> getAll() {
+        return AccountCache.accounts.values().stream().collect(Collectors.toList());
     }
 
-    @RequestMapping(value = "/{username}/{age}", method = RequestMethod.PUT)
+    @PutMapping(value = "/{username}/{age}")
     public String updateAge(@PathVariable String username, @PathVariable int age) {
         if (age != 0) {
             AccountCache.accounts.get(username).setAge(age);
