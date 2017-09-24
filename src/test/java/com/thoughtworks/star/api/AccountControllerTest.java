@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,8 +29,22 @@ class AccountControllerTest extends BaseControllerTest {
         Account account = Account.builder().username("future_star").password("1").age(22).build();
         AccountCache.accounts.put("future_star", account);
         mockMvc.perform(get("/api/accounts"))
-                .andExpect(status().isOk()).andExpect(jsonPath("$",hasSize(1)));
+                .andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(1)));
 
+    }
+
+    @Test
+    public void should_update_age() throws Exception {
+        Account account = Account.builder().username("future_star").password("1").age(22).build();
+        AccountCache.accounts.put("future_star", account);
+
+        Account newAccount = Account.builder().username("future_star").password("1").age(3).build();
+
+        mockMvc.perform(put("/api/accounts/" + account.getUsername())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(newAccount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value("update age success"));
     }
 
 
