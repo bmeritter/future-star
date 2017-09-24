@@ -49,4 +49,5 @@ dependencies {
     testCompile 'org.junit.platform:junit-platform-runner:1.0.0'
 
     testCompile 'com.github.sbrannen:spring-test-junit5:1.0.0'
+
 }
