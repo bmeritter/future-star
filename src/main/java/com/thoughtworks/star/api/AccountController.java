@@ -2,6 +2,7 @@ package com.thoughtworks.star.api;
 
 import com.thoughtworks.star.dto.Account;
 import com.thoughtworks.star.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,11 +12,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
-    private AccountService accountService;
 
-    public AccountController(AccountService accountService) {
-        this.accountService = accountService;
-    }
+    @Autowired
+    private AccountService accountService;
 
     @PostMapping
     public String create(@RequestBody Account account) {
@@ -33,9 +32,8 @@ public class AccountController {
     }
 
     @RequestMapping(params = "age")
-    public List<Map.Entry<String, Account>> getAccountByAge(@RequestParam int age) {
-        return AccountCache.accounts.entrySet().stream().filter(item -> item.getValue().getAge() == age)
-                .collect(Collectors.toList());
+        public List<Map.Entry<String, Account>> getAccountByAge(@RequestParam int age) {
+        return accountService.getAccountByAge(age);
     }
 
 }
