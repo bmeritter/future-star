@@ -20,13 +20,7 @@ public class CalculatorController {
         return new Calculator().sumEvens(numbers);
     }
 
-    @RequestMapping("/api/count")
-    @ResponseStatus(HttpStatus.OK)
-    public Map<String, Integer> countWordsLength(@RequestParam List<String> words) {
-        return SorterLength.countWordsLengthAsc(words);
-    }
-
-    @RequestMapping("/api/count-letters")
+    @RequestMapping("/api/letters-counts")
     @ResponseStatus(HttpStatus.OK)
     public String countLettersLength(@RequestParam String letters) {
         return SorterLength.sortLettersByCount(letters);
