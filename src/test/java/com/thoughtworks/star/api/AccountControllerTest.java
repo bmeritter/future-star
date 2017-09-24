@@ -24,34 +24,35 @@ class AccountControllerTest extends BaseControllerTest {
     @Test
     public void should_return_account_list() throws Exception {
         Account account = Account.builder().username("future_star").password("1").age(22).build();
-        AccountCache.accounts.put("future_star", account);
+        AccountCache.add(account);
         mockMvc.perform(get("/api/accounts"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void should_update_age() throws Exception {
-        Account account = Account.builder().username("future_star").password("1").age(22).build();
-        AccountCache.accounts.put("future_star", account);
+        AccountCache.clear();
 
-        Account newAccount = Account.builder().username("future_star").password("1").age(3).build();
+        Account account = Account.builder().username("future_star").password("1").age(22).build();
+
+        AccountCache.add(account);
+        Account updatedAccount = Account.builder().username("future_star").password("1").age(3).build();
+        AccountCache.add(updatedAccount);
 
         mockMvc.perform(put("/api/accounts/" + account.getUsername())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(newAccount)))
+                .content(new ObjectMapper().writeValueAsString(updatedAccount)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value("update age success"));
     }
 
     @Test
     public void should_return_accounts_by_age() throws Exception {
-        Account accountOne = Account.builder().username("future_st").password("1").age(22).build();
-        Account accountTwo = Account.builder().username("future_sta").password("1").age(2).build();
-        Account accountThree = Account.builder().username("future_star").password("1").age(22).build();
+        AccountCache.clear();
 
-        AccountCache.accounts.put(accountOne.getUsername(), accountOne);
-        AccountCache.accounts.put(accountTwo.getUsername(), accountTwo);
-        AccountCache.accounts.put(accountThree.getUsername(), accountThree);
+        AccountCache.add(Account.builder().username("future_st").password("1").age(22).build());
+        AccountCache.add(Account.builder().username("future_sta").password("1").age(2).build());
+        AccountCache.add(Account.builder().username("future_star").password("1").age(22).build());
 
         mockMvc.perform(get("/api/accounts").param("age", "22"))
                 .andExpect(status().isOk());
