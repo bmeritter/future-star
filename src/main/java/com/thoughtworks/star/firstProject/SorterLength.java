@@ -3,7 +3,7 @@ package com.thoughtworks.star.firstProject;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Sorter {
+public class SorterLength {
     public static Map<String, Integer> countWordsLengthAsc(List<String> words) {
         Collections.sort(words);
         Map<String, Integer> resultMap = new LinkedHashMap<>();
