@@ -13,7 +13,13 @@ class CalculatorControllerTest extends BaseControllerTest {
         mockMvc.perform(get("/api/letters-counts").param("letters", "aababbbcabcdabcde"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value("5(a)<6(b)<3(c)<2(d)<1(e)"));
+    }
 
+    @Test
+    public void should_return_evens_sum() throws Exception {
+        mockMvc.perform(get("/api/sum").param("numbers", "1,2,3,4,5,6,7,8,9,10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(30));
     }
 
 }
