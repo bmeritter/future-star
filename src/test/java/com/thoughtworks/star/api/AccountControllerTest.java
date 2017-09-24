@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,7 +27,8 @@ class AccountControllerTest extends BaseControllerTest {
         Account account = Account.builder().username("future_star").password("1").age(22).build();
         AccountCache.accounts.put("future_star", account);
         mockMvc.perform(get("/api/accounts"))
-                .andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
 
     }
 
@@ -47,5 +46,17 @@ class AccountControllerTest extends BaseControllerTest {
                 .andExpect(jsonPath("$").value("update age success"));
     }
 
+    @Test
+    public void should_return_accounts_by_age() throws Exception {
+        Account accountOne = Account.builder().username("future_st").password("1").age(22).build();
+        Account accountTwo = Account.builder().username("future_sta").password("1").age(2).build();
+        Account accountThree = Account.builder().username("future_star").password("1").age(22).build();
 
+        AccountCache.accounts.put(accountOne.getUsername(), accountOne);
+        AccountCache.accounts.put(accountTwo.getUsername(), accountTwo);
+        AccountCache.accounts.put(accountThree.getUsername(), accountThree);
+
+        mockMvc.perform(get("/api/accounts").param("age", "22"))
+                .andExpect(status().isOk());
+    }
 }
