@@ -8,9 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.transaction.Transactional;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = FutureStarApplication.class)
 @AutoConfigureMockMvc
+@Transactional
 public class BaseControllerTest {
 
     @Autowired

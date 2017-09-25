@@ -20,7 +20,8 @@ public class AccountController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestBody Account account) {
-        return accountService.create(account);
+        accountService.save(account);
+        return account.getUsername();
     }
 
     @GetMapping

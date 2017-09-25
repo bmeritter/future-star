@@ -2,6 +2,8 @@ package com.thoughtworks.star.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.util.StringUtil;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
@@ -10,15 +12,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class AccountControllerTest extends BaseControllerTest {
+
+
     @Test
     public void should_create_account() throws Exception {
-        Account account = Account.builder().username("future_star").password("1").age(22).build();
+        Account account = Account.builder().username("future_star").password("123456").age(22).build();
 
         mockMvc.perform(post("/api/accounts")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(account)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$").value("create success"));
+                .andExpect(jsonPath("$").value("future_star"));
     }
 
     @Test
@@ -29,6 +33,7 @@ class AccountControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Disabled
     @Test
     public void should_update_age() throws Exception {
         AccountCache.clear();
