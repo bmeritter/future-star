@@ -2,7 +2,6 @@ package com.thoughtworks.star.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.star.dto.Account;
-import com.thoughtworks.star.util.StringUtil;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

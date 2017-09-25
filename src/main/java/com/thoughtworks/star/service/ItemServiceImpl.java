@@ -6,6 +6,9 @@ import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
+
 @Service
 public class ItemServiceImpl implements ItemService {
 
@@ -16,5 +19,10 @@ public class ItemServiceImpl implements ItemService {
     public void save(Item item) {
         item.setId(StringUtil.randomUUID());
         itemRepository.save(item);
+    }
+
+    @Override
+    public Collection<Item> findAll() {
+        return itemRepository.findAll();
     }
 }

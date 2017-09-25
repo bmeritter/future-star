@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/api/items")
 public class ItemController {
@@ -18,5 +20,11 @@ public class ItemController {
     public String create(@RequestBody Item item) {
         itemService.save(item);
         return item.getName();
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Collection<Item> getAll() {
+        return itemService.findAll();
     }
 }
