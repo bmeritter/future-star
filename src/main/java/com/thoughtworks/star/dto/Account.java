@@ -2,10 +2,7 @@ package com.thoughtworks.star.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -14,13 +11,12 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "t_user")
+@Table(name = "t_account")
 public class Account {
 
     @Id
     private String id;
 
-    @Column(unique = true)
     private String username;
 
     private String password;

@@ -30,4 +30,9 @@ public class AccountServiceImpl implements AccountService {
     public List<Map.Entry<String, Account>> getAccountByAge(int age) {
         return null;
     }
+
+    @Override
+    public Account findOneByUsername(String username) {
+        return accountRepository.findAccountByUsername(username);
+    }
 }

@@ -11,6 +11,8 @@ public interface AccountService {
     String updateAge(String username, Account account);
     List<Map.Entry<String, Account>> getAccountByAge(int age);
 
+    Account findOneByUsername(String username);
+
 //    {
 //        if ("".equals(account.getPassword()) && "".equals(account.getUsername())) {
 //            return "create failed";

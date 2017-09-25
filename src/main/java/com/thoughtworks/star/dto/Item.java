@@ -2,9 +2,7 @@ package com.thoughtworks.star.dto;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -15,8 +13,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_item")
 public class Item {
+
     @Id
     private String id;
+
+    @Column(unique = true)
     private String name;
     private Integer price;
+
 }
