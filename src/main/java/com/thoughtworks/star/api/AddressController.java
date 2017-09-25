@@ -26,8 +26,8 @@ public class AddressController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestParam String username, @RequestBody Address address) {
-        address.setId(StringUtil.randomUUID());
         Account account = accountService.findOneByUsername(username);
+
         address.setAccount(account);
         addressService.save(address);
 

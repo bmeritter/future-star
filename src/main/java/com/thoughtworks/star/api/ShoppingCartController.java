@@ -38,8 +38,7 @@ public class ShoppingCartController {
         items.add(item);
         itemService.save(item);
 
-        String shoppingCartId = StringUtil.randomUUID();
-        ShoppingCart shoppingCart = ShoppingCart.builder().account(account).id(shoppingCartId).items(items).build();
+        ShoppingCart shoppingCart = ShoppingCart.builder().account(account).items(items).build();
         shoppingCartService.save(shoppingCart);
     }
 }
