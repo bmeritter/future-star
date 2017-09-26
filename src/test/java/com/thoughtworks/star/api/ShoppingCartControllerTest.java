@@ -6,7 +6,9 @@ import com.thoughtworks.star.dto.Item;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.service.ShoppingCartService;
+import com.thoughtworks.star.util.StringUtil;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +36,7 @@ class ShoppingCartControllerTest extends BaseControllerTest {
 
     @BeforeEach
     void setUp() {
-        account = Account.builder().age(12).username("future_star").password("123456").build();
+        account = Account.builder().id(StringUtil.randomUUID()).age(12).username("future_star").password("123456").build();
         accountService.save(account);
     }
 

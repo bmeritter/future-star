@@ -26,6 +26,10 @@ public class Account {
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
-    private Set<Address> addresses;
+    private List<Address> addresses;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Set<Order> orders;
 
 }

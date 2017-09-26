@@ -1,7 +1,8 @@
-package com.thoughtworks.star.service;
+package com.thoughtworks.star.service.iml;
 
 import com.thoughtworks.star.dto.Item;
 import com.thoughtworks.star.repository.ItemRepository;
+import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
