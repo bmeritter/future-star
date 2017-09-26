@@ -7,7 +7,6 @@ import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.service.ShoppingCartService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -42,9 +41,8 @@ class ShoppingCartControllerTest extends BaseControllerTest {
     @Test
     public void should_add_item_to_shopping_cart() throws Exception {
         Item item = Item.builder().price(3).name("item 3").build();
-        String username = "future_star";
 
-        mockMvc.perform(post("/api/shopping-cart").param("username", username)
+        mockMvc.perform(post("/api/shopping-cart")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(item)))
                 .andExpect(status().isOk());
@@ -58,7 +56,7 @@ class ShoppingCartControllerTest extends BaseControllerTest {
         Set<Item> items = new HashSet<>();
         items.add(item);
 
-        shoppingCartService.save(account.getUsername(), item);
+        shoppingCartService.save(item);
 
         mockMvc.perform(get("/api/shopping-cart").param("username", "future_star")
                 .contentType(MediaType.APPLICATION_JSON))

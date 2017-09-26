@@ -4,6 +4,7 @@ import com.thoughtworks.star.dto.Account;
 import com.thoughtworks.star.dto.Item;
 import com.thoughtworks.star.dto.ShoppingCart;
 import com.thoughtworks.star.repository.ShoppingCartRepository;
+import com.thoughtworks.star.util.SessionCache;
 import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private AccountService accountService;
 
     @Autowired
-    private ItemService itemService;
+    private SessionCache sessionCache;
 
     @Override
     public ShoppingCart findShoppingCartByAccount_Id(String accountId) {
@@ -29,8 +30,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
     @Override
-    public void save(String username, Item item) {
-        Account account = accountService.findOneByUsername(username);
+    public void save(Item item) {
+
+        String currentAccount = sessionCache.fetchCurrentAccount();
+
+        if (currentAccount.equals("")) {
+            return;
+        }
+
+        Account account = accountService.findOneByUsername(currentAccount);
 
         Set<Item> items = new HashSet<>();
         items.add(item);

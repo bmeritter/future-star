@@ -7,6 +7,6 @@ public interface ShoppingCartService {
 
     ShoppingCart findShoppingCartByAccount_Id(String accountId);
 
-    void save(String username, Item item);
+    void save(Item item);
 
 }

@@ -21,9 +21,9 @@ public class ShoppingCartController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void addToShoppingCart(@RequestParam String username, @RequestBody Item item) {
+    public void addToShoppingCart(@RequestBody Item item) {
 
-        shoppingCartService.save(username, item);
+        shoppingCartService.save(item);
     }
 
     @GetMapping
