@@ -23,29 +23,28 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private ItemService itemService;
 
     @Override
+    public ShoppingCart findShoppingCartByAccount_Id(String accountId) {
+        return shoppingCartRepository.findShoppingCartByAccount_Id(accountId);
+    }
+
+
+    @Override
     public void save(String username, Item item) {
         Account account = accountService.findOneByUsername(username);
 
         Set<Item> items = new HashSet<>();
         items.add(item);
-        itemService.save(item);
 
         ShoppingCart currentShoppingCart = shoppingCartRepository.findShoppingCartByAccount_Id(account.getId());
 
-        ShoppingCart shoppingCart = ShoppingCart.builder().account(account).items(items).build();
-        shoppingCart.setId(StringUtil.randomUUID());
         if (currentShoppingCart == null) {
+            ShoppingCart shoppingCart = ShoppingCart.builder().account(account).items(items).build();
+            shoppingCart.setId(StringUtil.randomUUID());
 
             shoppingCartRepository.save(shoppingCart);
         } else {
             currentShoppingCart.setItems(items);
-            currentShoppingCart.setAccount(account);
         }
 
-
-    }
-
-    public ShoppingCart findOneByAccount(Account account) {
-        return shoppingCartRepository.findOneByAccount(account);
     }
 }

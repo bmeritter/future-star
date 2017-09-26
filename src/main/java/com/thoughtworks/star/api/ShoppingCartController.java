@@ -31,7 +31,7 @@ public class ShoppingCartController {
     public ShoppingCart getAll(@RequestParam String username) {
         Account account = accountService.findOneByUsername(username);
 
-        ShoppingCart oneByAccount = shoppingCartService.findOneByAccount(account);
+        ShoppingCart oneByAccount = shoppingCartService.findShoppingCartByAccount_Id(account.getId());
         System.out.println(oneByAccount);
         return oneByAccount;
 

@@ -3,7 +3,6 @@ package com.thoughtworks.star.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.star.dto.Account;
 import com.thoughtworks.star.dto.Item;
-import com.thoughtworks.star.dto.ShoppingCart;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.service.ShoppingCartService;
@@ -13,9 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -53,10 +50,9 @@ class ShoppingCartControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Disabled
     @Test
     public void should_return_shopping_cart_by_username() throws Exception {
-        Item item = Item.builder().name("item 2").price(1).build();
+        Item item = Item.builder().name("item 7").price(1).build();
         itemService.save(item);
 
         Set<Item> items = new HashSet<>();
