@@ -15,8 +15,8 @@ public class AddressController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestParam String username, @RequestBody Address address) {
+    public void create(@RequestBody Address address) {
 
-        addressService.save(username, address);
+        addressService.save(address);
     }
 }

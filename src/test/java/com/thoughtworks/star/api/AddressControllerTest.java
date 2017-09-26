@@ -31,7 +31,7 @@ class AddressControllerTest extends BaseControllerTest {
     public void should_create_address() throws Exception {
         Address address = Address.builder().addressDetail("shanxi").build();
 
-        mockMvc.perform(post("/api/addresses").param("username", "future_star")
+        mockMvc.perform(post("/api/addresses")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(address)))
                 .andExpect(status().isCreated());

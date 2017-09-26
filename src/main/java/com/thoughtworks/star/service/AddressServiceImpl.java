@@ -3,6 +3,7 @@ package com.thoughtworks.star.service;
 import com.thoughtworks.star.dto.Account;
 import com.thoughtworks.star.dto.Address;
 import com.thoughtworks.star.repository.AddressRepository;
+import com.thoughtworks.star.util.SessionCache;
 import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,18 @@ public class AddressServiceImpl implements AddressService {
     @Autowired
     private AccountService accountService;
 
-    @Override
-    public void save(String username, Address address) {
+    @Autowired
+    private SessionCache sessionCache;
 
-        Account account = accountService.findOneByUsername(username);
+    @Override
+    public void save(Address address) {
+        String currentAccount = sessionCache.fetchCurrentAccount();
+
+        if (currentAccount.equals("")) {
+            return;
+        }
+
+        Account account = accountService.findOneByUsername(currentAccount);
 
         address.setId(StringUtil.randomUUID());
 

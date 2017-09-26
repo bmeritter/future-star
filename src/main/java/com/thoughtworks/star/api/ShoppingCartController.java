@@ -32,7 +32,6 @@ public class ShoppingCartController {
         Account account = accountService.findOneByUsername(username);
 
         ShoppingCart oneByAccount = shoppingCartService.findShoppingCartByAccount_Id(account.getId());
-        System.out.println(oneByAccount);
         return oneByAccount;
 
     }
