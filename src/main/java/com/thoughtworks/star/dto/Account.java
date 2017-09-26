@@ -3,6 +3,8 @@ package com.thoughtworks.star.dto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,5 +23,9 @@ public class Account {
 
     private String password;
     private Integer age;
+
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
+    private Set<Address> addresses;
 
 }

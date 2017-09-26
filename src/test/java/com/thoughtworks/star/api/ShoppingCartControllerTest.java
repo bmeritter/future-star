@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -55,7 +57,7 @@ class ShoppingCartControllerTest extends BaseControllerTest {
         Item item = Item.builder().name("item 2").price(1).build();
         itemService.save(item);
 
-        List<Item> items = new ArrayList<>();
+        Set<Item> items = new HashSet<>();
         items.add(item);
 
         ShoppingCart shoppingCart = ShoppingCart.builder().account(account).items(items).build();

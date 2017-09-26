@@ -17,8 +17,4 @@ public class Address {
     @Id
     private String id;
     private String addressDetail;
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
-    private Account account;
 }

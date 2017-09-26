@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,5 +25,5 @@ public class ShoppingCart {
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinTable(name = "t_shopping_cart_item", joinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
-    private List<Item> items = new ArrayList<>();
+    private Set<Item> items;
 }

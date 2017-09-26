@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/shopping-cart")
@@ -33,7 +35,7 @@ public class ShoppingCartController {
     public void addToShoppingCart(@RequestParam String username, @RequestBody Item item) {
         Account account = accountService.findOneByUsername(username);
 
-        List<Item> items = new ArrayList<>();
+        Set<Item> items = new HashSet<>();
         items.add(item);
         itemService.save(item);
 
