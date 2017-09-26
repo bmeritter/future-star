@@ -58,7 +58,7 @@ class ShoppingCartControllerTest extends BaseControllerTest {
 
         shoppingCartService.save(item);
 
-        mockMvc.perform(get("/api/shopping-cart").param("username", "future_star")
+        mockMvc.perform(get("/api/shopping-cart")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())

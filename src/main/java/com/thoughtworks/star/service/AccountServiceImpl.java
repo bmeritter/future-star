@@ -33,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findOneByUsername(String username) {
+
         return accountRepository.findAccountByUsername(username);
     }
 }

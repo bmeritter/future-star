@@ -8,6 +8,7 @@ import java.util.Map;
 public interface AccountService {
 
     void save(Account account);
+
     Account findOneByUsername(String username);
 
     String updateAge(String username, Account account);
