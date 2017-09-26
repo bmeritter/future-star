@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, String> {
     ShoppingCart findOneByAccount(Account account);
+
+    ShoppingCart findShoppingCartByAccount_Id(String accountId);
 }
