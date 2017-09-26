@@ -7,7 +7,6 @@ import com.thoughtworks.star.dto.ShoppingCart;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.service.ShoppingCartService;
-import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +39,16 @@ public class ShoppingCartController {
 
         ShoppingCart shoppingCart = ShoppingCart.builder().account(account).items(items).build();
         shoppingCartService.save(shoppingCart);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ShoppingCart getAll(@RequestParam String username) {
+        Account account = accountService.findOneByUsername(username);
+
+        ShoppingCart oneByAccount = shoppingCartService.findOneByAccount(account);
+        System.out.println(oneByAccount);
+        return oneByAccount;
+
     }
 }

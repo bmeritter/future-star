@@ -8,10 +8,10 @@ import java.util.Map;
 public interface AccountService {
 
     void save(Account account);
+    Account findOneByUsername(String username);
+
     String updateAge(String username, Account account);
     List<Map.Entry<String, Account>> getAccountByAge(int age);
-
-    Account findOneByUsername(String username);
 
 //    {
 //        if ("".equals(account.getPassword()) && "".equals(account.getUsername())) {

@@ -1,5 +1,6 @@
 package com.thoughtworks.star.service;
 
+import com.thoughtworks.star.dto.Account;
 import com.thoughtworks.star.dto.ShoppingCart;
 import com.thoughtworks.star.repository.ShoppingCartRepository;
 import com.thoughtworks.star.util.StringUtil;
@@ -15,5 +16,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void save(ShoppingCart shoppingCart) {
         shoppingCart.setId(StringUtil.randomUUID());
         shoppingCartRepository.save(shoppingCart);
+    }
+
+    public ShoppingCart findOneByAccount(Account account) {
+        return shoppingCartRepository.findOneByAccount(account);
     }
 }
