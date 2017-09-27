@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,10 +25,8 @@ public class AddressServiceImpl implements AddressService {
     private AccountService accountService;
 
     @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
     private SessionCache sessionCache;
+
 
     @Override
     @Transactional
@@ -38,11 +36,14 @@ public class AddressServiceImpl implements AddressService {
 
         address.setId(StringUtil.randomUUID());
 
-        List<Address> addresses = new ArrayList<>();
-        addresses.add(address);
+        List<Address> addresses = Arrays.asList(address);
+
+        if (account.getAddresses() != null) {
+            addresses.addAll(account.getAddresses());
+        }
+
         account.setAddresses(addresses);
 
         addressRepository.save(address);
-        accountRepository.save(account);
     }
 }

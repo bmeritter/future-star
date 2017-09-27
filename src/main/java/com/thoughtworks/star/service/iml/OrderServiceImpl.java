@@ -33,8 +33,7 @@ public class OrderServiceImpl implements OrderService {
         String currentAccount = sessionCache.fetchCurrentAccount();
         Account account = accountRepository.findAccountByUsername(currentAccount);
 
-        List<Address> set = account.getAddresses();
-        Address address = set.get(0);
+        Address address = account.getAddresses().get(0);
 
         Order order = Order.builder().id(StringUtil.randomUUID()).address(address).items(items).build();
 
@@ -43,7 +42,6 @@ public class OrderServiceImpl implements OrderService {
         account.setOrders(orders);
 
         orderRepository.save(order);
-        accountRepository.save(account);
     }
 
     @Override

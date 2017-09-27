@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.star.entity.Account;
 import com.thoughtworks.star.entity.Address;
 import com.thoughtworks.star.entity.Item;
+import com.thoughtworks.star.repository.AccountRepository;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.AddressService;
 import com.thoughtworks.star.service.ItemService;
@@ -29,15 +30,18 @@ public class OrderControllerTest extends BaseControllerTest {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
     @BeforeEach
     void setUp() {
+
         Account account = Account.builder().age(12).username("future_star").password("123456").build();
         accountService.create(account);
 
         Address address = Address.builder().addressDetail("PK").build();
         List<Address> addresses = new ArrayList<>();
         addresses.add(address);
-        account.setAddresses(addresses);
 
         addressService.create(address);
     }
