@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface AccountService {
 
-    void create(Account account);
+    Account create(Account account);
 
     Account findOneByUsername(String username);
 
