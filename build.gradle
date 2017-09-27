@@ -21,10 +21,14 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: "org.flywaydb.flyway"
 
+def properties = new Properties()
+properties.load(project.file("config/db.properties").newReader())
+
 flyway {
-    url = 'jdbc:mysql://127.0.0.1/future_star'
-    user = 'root'
-    password = 'dev'
+    driver = 'com.mysql.jdbc.Driver'
+    url = properties.get('db.url')
+    user = properties.get('db.user')
+    password = properties.get('db.password')
 }
 
 jar {
