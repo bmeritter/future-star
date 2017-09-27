@@ -14,9 +14,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean login(Account account) {
-        if (loginRepository.findOneByUsernameAndPassword(account.getUsername(), account.getPassword()) == null) {
-            return false;
-        }
-        return true;
+        return loginRepository.findAccountByUsername(account.getUsername()).getPassword().equals(account.getPassword());
     }
 }
