@@ -33,8 +33,3 @@ public class Account {
     private List<Order> orders;
 
 }
-
-//todo
-/*
-entity 请求数据类型
- */

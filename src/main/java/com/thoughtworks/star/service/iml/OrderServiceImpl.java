@@ -44,9 +44,6 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(order);
         accountRepository.save(account);
-        /*
-        @Transactional 其中一个出错会回滚
-         */
     }
 
     @Override

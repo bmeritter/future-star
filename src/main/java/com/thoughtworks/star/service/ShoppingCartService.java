@@ -8,5 +8,4 @@ public interface ShoppingCartService {
     ShoppingCart findShoppingCartByAccount_Id(String accountId);
 
     void create(Item item);
-
 }
