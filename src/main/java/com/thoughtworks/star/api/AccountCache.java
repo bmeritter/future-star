@@ -1,6 +1,6 @@
 package com.thoughtworks.star.api;
 
-import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.entity.Account;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,12 +1,13 @@
 package com.thoughtworks.star.service.iml;
 
-import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.entity.Account;
 import com.thoughtworks.star.repository.AccountRepository;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +18,9 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public void save(Account account) {
-//        account.setId(StringUtil.randomUUID());
+    @Transactional
+    public void create(Account account) {
+        account.setId(StringUtil.randomUUID());
         accountRepository.save(account);
     }
 

@@ -1,8 +1,8 @@
 package com.thoughtworks.star.service.iml;
 
-import com.thoughtworks.star.dto.Account;
-import com.thoughtworks.star.dto.Item;
-import com.thoughtworks.star.dto.ShoppingCart;
+import com.thoughtworks.star.entity.Account;
+import com.thoughtworks.star.entity.Item;
+import com.thoughtworks.star.entity.ShoppingCart;
 import com.thoughtworks.star.repository.ShoppingCartRepository;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ShoppingCartService;
@@ -11,6 +11,7 @@ import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,16 +31,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return shoppingCartRepository.findShoppingCartByAccount_Id(accountId);
     }
 
-
     @Override
-    public void save(Item item) {
-
+    @Transactional
+    public void create(Item item) {
         String currentAccount = sessionCache.fetchCurrentAccount();
-
-        if (currentAccount.equals("")) {
-            return;
-        }
-
         Account account = accountService.findOneByUsername(currentAccount);
 
         Set<Item> items = new HashSet<>();
@@ -50,7 +45,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         if (currentShoppingCart == null) {
             ShoppingCart shoppingCart = ShoppingCart.builder().account(account).items(items).build();
             shoppingCart.setId(StringUtil.randomUUID());
-
             shoppingCartRepository.save(shoppingCart);
         } else {
             currentShoppingCart.setItems(items);

@@ -1,7 +1,7 @@
 package com.thoughtworks.star.service;
 
-import com.thoughtworks.star.dto.Address;
+import com.thoughtworks.star.entity.Address;
 
 public interface AddressService {
-    void save(Address address);
+    void create(Address address);
 }

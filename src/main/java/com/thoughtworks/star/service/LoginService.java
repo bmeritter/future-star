@@ -1,6 +1,6 @@
 package com.thoughtworks.star.service;
 
-import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.entity.Account;
 
 public interface LoginService {
 

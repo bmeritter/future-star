@@ -34,6 +34,6 @@ public class CalculatorTest {
     public void should_return_sorted_string_with_length() {
         String letters = "aababbbcabcdabcde";
 
-            assertThat(SorterLength.sortLettersByCount(letters), is("5(a)<6(b)<3(c)<2(d)<1(e)"));
+        assertThat(SorterLength.sortLettersByCount(letters), is("5(a)<6(b)<3(c)<2(d)<1(e)"));
     }
 }

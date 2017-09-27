@@ -1,10 +1,8 @@
 package com.thoughtworks.star.repository;
 
-import com.thoughtworks.star.dto.ShoppingCart;
+import com.thoughtworks.star.entity.ShoppingCart;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, String> {
     ShoppingCart findShoppingCartByAccount_Id(String accountId);
 }

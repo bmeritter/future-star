@@ -1,6 +1,6 @@
 package com.thoughtworks.star.api;
 
-import com.thoughtworks.star.dto.Address;
+import com.thoughtworks.star.entity.Address;
 import com.thoughtworks.star.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,6 @@ public class AddressController {
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Address address) {
 
-        addressService.save(address);
+        addressService.create(address);
     }
 }

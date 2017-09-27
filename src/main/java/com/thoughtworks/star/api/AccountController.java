@@ -1,6 +1,6 @@
 package com.thoughtworks.star.api;
 
-import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.entity.Account;
 import com.thoughtworks.star.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class AccountController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestBody Account account) {
-        accountService.save(account);
+        accountService.create(account);
         return account.getUsername();
     }
 

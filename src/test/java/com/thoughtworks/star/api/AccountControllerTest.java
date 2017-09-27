@@ -1,7 +1,7 @@
 package com.thoughtworks.star.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thoughtworks.star.dto.Account;
+import com.thoughtworks.star.entity.Account;
 import com.thoughtworks.star.util.StringUtil;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -13,10 +13,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class AccountControllerTest extends BaseControllerTest {
 
-
     @Test
     public void should_create_account() throws Exception {
-        Account account = Account.builder().id(StringUtil.randomUUID()).username("future_star_1").password("123456").age(22).build();
+        Account account = Account.builder().username("future_star_1").password("123456").age(22).build();
 
         mockMvc.perform(post("/api/accounts")
                 .contentType(MediaType.APPLICATION_JSON)

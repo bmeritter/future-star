@@ -1,20 +1,18 @@
 package com.thoughtworks.star.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thoughtworks.star.dto.Account;
-import com.thoughtworks.star.dto.Item;
+import com.thoughtworks.star.entity.Account;
+import com.thoughtworks.star.entity.Item;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.service.ShoppingCartService;
-import com.thoughtworks.star.util.StringUtil;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -36,8 +34,8 @@ class ShoppingCartControllerTest extends BaseControllerTest {
 
     @BeforeEach
     void setUp() {
-        account = Account.builder().id(StringUtil.randomUUID()).age(12).username("future_star").password("123456").build();
-        accountService.save(account);
+        account = Account.builder().age(12).username("future_star").password("123456").build();
+        accountService.create(account);
     }
 
     @Test
@@ -53,12 +51,12 @@ class ShoppingCartControllerTest extends BaseControllerTest {
     @Test
     public void should_return_shopping_cart_by_username() throws Exception {
         Item item = Item.builder().name("item 7").price(1).build();
-        itemService.save(item);
+        itemService.create(item);
 
-        Set<Item> items = new HashSet<>();
+        List<Item> items = new ArrayList<>();
         items.add(item);
 
-        shoppingCartService.save(item);
+        shoppingCartService.create(item);
 
         mockMvc.perform(get("/api/shopping-cart")
                 .contentType(MediaType.APPLICATION_JSON))

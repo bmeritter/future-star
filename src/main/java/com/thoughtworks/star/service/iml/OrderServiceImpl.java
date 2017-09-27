@@ -1,9 +1,9 @@
 package com.thoughtworks.star.service.iml;
 
-import com.thoughtworks.star.dto.Account;
-import com.thoughtworks.star.dto.Address;
-import com.thoughtworks.star.dto.Item;
-import com.thoughtworks.star.dto.Order;
+import com.thoughtworks.star.entity.Account;
+import com.thoughtworks.star.entity.Address;
+import com.thoughtworks.star.entity.Item;
+import com.thoughtworks.star.entity.Order;
 import com.thoughtworks.star.repository.AccountRepository;
 import com.thoughtworks.star.repository.OrderRepository;
 import com.thoughtworks.star.service.OrderService;
@@ -12,10 +12,9 @@ import com.thoughtworks.star.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -29,26 +28,29 @@ public class OrderServiceImpl implements OrderService {
     private AccountRepository accountRepository;
 
     @Override
-    public void save(Set<Item> items) {
+    @Transactional
+    public void create(List<Item> items) {
         String currentAccount = sessionCache.fetchCurrentAccount();
-
-        if (currentAccount.equals("")) {
-            return;
-        }
         Account account = accountRepository.findAccountByUsername(currentAccount);
 
         List<Address> set = account.getAddresses();
-
         Address address = set.get(0);
 
         Order order = Order.builder().id(StringUtil.randomUUID()).address(address).items(items).build();
 
-
-        Set<Order> orders = new HashSet<>();
+        List<Order> orders = new ArrayList<>();
         orders.add(order);
         account.setOrders(orders);
 
         orderRepository.save(order);
         accountRepository.save(account);
+        /*
+        @Transactional 其中一个出错会回滚
+         */
+    }
+
+    @Override
+    public List<Order> findAll() {
+        return orderRepository.findAll();
     }
 }

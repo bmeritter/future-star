@@ -1,10 +1,8 @@
-package com.thoughtworks.star.dto;
+package com.thoughtworks.star.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -19,10 +17,10 @@ public class ShoppingCart {
     @Id
     private String id;
 
-    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "t_shopping_cart_item", joinColumns = @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
     private Set<Item> items;

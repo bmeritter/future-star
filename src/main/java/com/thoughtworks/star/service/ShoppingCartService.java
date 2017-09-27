@@ -1,12 +1,12 @@
 package com.thoughtworks.star.service;
 
-import com.thoughtworks.star.dto.Item;
-import com.thoughtworks.star.dto.ShoppingCart;
+import com.thoughtworks.star.entity.Item;
+import com.thoughtworks.star.entity.ShoppingCart;
 
 public interface ShoppingCartService {
 
     ShoppingCart findShoppingCartByAccount_Id(String accountId);
 
-    void save(Item item);
+    void create(Item item);
 
 }

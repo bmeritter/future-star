@@ -1,8 +1,8 @@
 package com.thoughtworks.star.api;
 
-import com.thoughtworks.star.dto.Account;
-import com.thoughtworks.star.dto.Item;
-import com.thoughtworks.star.dto.ShoppingCart;
+import com.thoughtworks.star.entity.Account;
+import com.thoughtworks.star.entity.Item;
+import com.thoughtworks.star.entity.ShoppingCart;
 import com.thoughtworks.star.service.AccountService;
 import com.thoughtworks.star.service.ShoppingCartService;
 import com.thoughtworks.star.util.SessionCache;
@@ -26,8 +26,7 @@ public class ShoppingCartController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void addToShoppingCart(@RequestBody Item item) {
-
-        shoppingCartService.save(item);
+        shoppingCartService.create(item);
     }
 
     @GetMapping
@@ -43,6 +42,5 @@ public class ShoppingCartController {
 
         ShoppingCart oneByAccount = shoppingCartService.findShoppingCartByAccount_Id(account.getId());
         return oneByAccount;
-
     }
 }

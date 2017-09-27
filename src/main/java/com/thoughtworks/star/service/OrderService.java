@@ -1,9 +1,12 @@
 package com.thoughtworks.star.service;
 
-import com.thoughtworks.star.dto.Item;
+import com.thoughtworks.star.entity.Item;
+import com.thoughtworks.star.entity.Order;
 
-import java.util.Set;
+import java.util.List;
 
 public interface OrderService {
-    void save(Set<Item> items);
+    void create(List<Item> items);
+
+    List<Order> findAll();
 }

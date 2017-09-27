@@ -1,6 +1,6 @@
 package com.thoughtworks.star.api;
 
-import com.thoughtworks.star.dto.Item;
+import com.thoughtworks.star.entity.Item;
 import com.thoughtworks.star.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class ItemController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String create(@RequestBody Item item) {
-        itemService.save(item);
+        itemService.create(item);
         return item.getName();
     }
 

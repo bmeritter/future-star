@@ -1,6 +1,6 @@
 package com.thoughtworks.star.api;
 
-import com.thoughtworks.star.dto.Item;
+import com.thoughtworks.star.entity.Item;
 import com.thoughtworks.star.service.ItemService;
 import com.thoughtworks.star.util.StringUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ class ItemControllerTest extends BaseControllerTest {
 
     @BeforeEach
     void setUp() {
-        itemService.save(Item.builder().name("item 1").price(1).id(StringUtil.randomUUID()).build());
+        itemService.create(Item.builder().name("item 1").price(1).id(StringUtil.randomUUID()).build());
     }
 
     @Test
