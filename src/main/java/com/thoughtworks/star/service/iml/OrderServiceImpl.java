@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -37,8 +37,11 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = Order.builder().id(StringUtil.randomUUID()).address(address).items(items).build();
 
-        List<Order> orders = new ArrayList<>();
-        orders.add(order);
+        List<Order> orders = Arrays.asList(order);
+        if (account.getOrders() != null) {
+            orders.addAll(account.getOrders());
+        }
+
         account.setOrders(orders);
 
         orderRepository.save(order);
